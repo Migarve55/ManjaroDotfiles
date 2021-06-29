@@ -15,11 +15,9 @@ local lain = require("lain")
 -- Freedesktop menu
 local freedesktop = require("freedesktop")
 -- Widgets
-local calendar_widget = require("widgets.calendar-widget.calendar")
-local cpu_widget = require("widgets.cpu-widget.cpu-widget")
-local volumearc_widget = require("widgets.volumearc-widget.volumearc")
-local ram_widget = require("widgets.ram-widget.ram-widget")
-local weather_widget = require("widgets.weather-widget.weather")
+local calendar_widget = require("calendar")
+local cpu_widget = require("cpu-widget")
+local volumearc_widget = require("volumearc")
 -- Enable VIM help for hotkeys widget when client with matching name is opened:
 -- require("awful.hotkeys_popup.keys.vim")
 -- {{{ Error handling
@@ -150,15 +148,6 @@ local cw = calendar_widget({
 })
 local vol = volumearc_widget()
 local cpu = cpu_widget()
-local ram = ram_widget()
-local weather = weather_widget({
-            api_key='47b790fd0fc41878c80c57c9846132cb',
-            coordinates = {43.35409, -5.847428},
-            time_format_12h = false,
-            units = 'metric',
-            show_hourly_forecast = true,
-            show_daily_forecast = true,
-        })
 
 -- {{{ Wibar
 -- Create a textclock widget
@@ -262,11 +251,8 @@ awful.screen.connect_for_each_screen(function(s)
         { -- Right widgets
                     layout = wibox.layout.fixed.horizontal,
                     wibox.widget.systray(),
-                    --mykeyboardlayout,
                     seperator,
-					weather,
 					vol,
-					ram,
 					cpu,
                     mytextclock,
                     s.mylayoutbox,
